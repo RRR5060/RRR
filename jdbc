@@ -1,0 +1,40 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.util.Scanner;
+
+public class insertdb {
+	public static void main(String args[]) {
+		String name,email,phone,pass;
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter Name");
+		name = s.next();
+		System.out.println("Enter Email");
+		email = s.next();
+		System.out.println("Enter Phone");
+		phone = s.next();
+		System.out.println("Enter Password");
+		pass = s.next();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/user1","root","");
+			PreparedStatement ps = con.prepareStatement("insert into pes1(name,email,phone,password) values(?,?,?,?)");
+			ps.setString(1, name);
+			ps.setString(2, email);
+			ps.setString(3, phone);
+			ps.setString(4, pass);
+			int i = ps.executeUpdate();
+			if(i>0) {
+				System.out.println("Inserted");
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+
+
+
+
